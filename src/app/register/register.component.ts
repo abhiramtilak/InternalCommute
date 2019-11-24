@@ -42,6 +42,8 @@ export class RegisterComponent implements OnInit {
     if (this.registrationForm.invalid) {
       return;
   }
+  console.log(JSON.stringify(this.registrationForm.value));
+  // return false;
     this.registerService.registerUser(JSON.stringify(this.registrationForm.value)).subscribe(res => this.apiResponse = res);
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registrationForm.value));
   }

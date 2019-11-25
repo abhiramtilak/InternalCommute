@@ -19,21 +19,6 @@ label {
     margin-top: 1px;
     
 }
-.btn-primary {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-    margin-left: 25%;
-}
-.btn{
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    margin-bottom: .5rem;
-    margin-top: .5rem;
-}
 .invalid-feedback{
     font-size: 80%;
     color: #dc3545;

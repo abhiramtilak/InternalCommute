@@ -10,7 +10,7 @@ export class RegisterService {
 
   constructor( private httpClient: HttpClient ) { }
 
-  registerUser(user: String): Observable<String>{
-    return this.httpClient.post<String>('http://localhost:8080/register/user', user);
+  registerUser(user): Observable<any>{
+    return this.httpClient.post<any>('http://localhost:8080/register/user', user, { observe : 'response' });
   }
 }

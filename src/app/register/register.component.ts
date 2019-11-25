@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../_helpers/must-match.validator';
-import { RegisterService } from '../services/register.service'
+import { RegisterService } from '../services/register.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-register',
@@ -12,10 +13,12 @@ export class RegisterComponent implements OnInit {
   registrationForm: FormGroup;
   submitted = false;
   apiResponse: String;
+  errorMessage: String;
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private router: Router
   ) { 
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -37,13 +40,24 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
   get f() { return this.registrationForm.controls; }
+
+
   submitRegistration(){
     this.submitted = true;
     if (this.registrationForm.invalid) {
       return;
   }
-    this.registerService.registerUser(JSON.stringify(this.registrationForm.value)).subscribe(res => this.apiResponse = res);
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registrationForm.value));
+    this.registerService.registerUser(this.registrationForm.value).subscribe(res => {
+      if (res != null) {
+        if( res.status == 200 ){
+          this.router.navigate(['/login'] );
+        }else{
+          this.errorMessage = "Some thing went Wrong please try again!!"
+        }
+      }
+    });
   }
+
+
 
 }

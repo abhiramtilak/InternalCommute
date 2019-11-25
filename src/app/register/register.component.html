@@ -7,7 +7,7 @@
 <table  style="width: 100%;">
     <tr>
     <div class="form-group">
-        <td class="headingWidth"><label>First Name</label></td>
+        <td class="headingWidth"><label>First  Name</label></td>
         <td><input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" /></td>
         <tr><td></td><td><div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
             <div *ngIf="f.firstName.errors.required">First Name is required</div>
@@ -128,6 +128,7 @@
             <button class="btn btn-primary">Register</button>
         </div></td>
     </tr>
+    <tr><td colspan="2">{{errorMessage}}</td></tr>
     </table>
 </form>
 

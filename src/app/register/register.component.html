@@ -1,7 +1,6 @@
 <div class="">
     <div class="col-md-offset-5 col-md-7"><h3 style="font-family: Segoe UI,Arial,sans-serif;">Registration Form</h3></div>
 </div>
-<a href="/login" class="pull-right" style="font-size: large;">Login</a>
 <div class="jumbotron">
         <div class="container">
             <div class="row">
@@ -126,13 +125,16 @@
                 <div *ngIf="f.availableSeats.errors.required">Available Seats is required</div>
             </div>
     </div>
-    
+    <div class="alert alert-success" *ngIf="successMessageStatus">
+        <strong>Success!!</strong> {{successMessage}}
+      </div>
+    <div class="alert alert-danger" *ngIf="errorMessageStatus">
+        <strong>Error!!</strong> {{errorMessage}}
+      </div>
     <div class="form-group">
             <button class="btn btn-primary">Register</button>
-        </div></td>
-    </tr>
-    <tr><td colspan="2">{{errorMessage}}</td></tr>
-    </table>
+            <a href="/login" class="pull-right" style="margin-left: 20px;" class="btn btn-primary">Login</a>
+        </div>
 </form>
 
 </div>

@@ -36,16 +36,35 @@ export class LoginComponent implements OnInit {
       return;
   }
   this.loginService.userDetails(this.loginForm.value).subscribe((res) => {
-    debugger
+    
+    this.preparesessionObject(res.body);
+
     if( res.body.role != null ){
-      this.router.navigate(['/rider']);
+      if( res.body.role === 'Rider' ){
+        this.router.navigate(['/rider']);
+      }else if( res.body.role === 'RideTaker' ){
+        this.router.navigate(['/ridertaker']);
+      }else if( res.body.role === 'admin' ){
+        this.router.navigate(['/admin']);
+      }      
     }
   }, err => {
-    debugger
       this.errorMessage = "Please enter valid credentials.";
       this.errorMessageStatus = true;
       console.log(err);
   });
+  }
+  preparesessionObject(user){
+    sessionStorage.setItem('availableseats',user.availableSeats);
+    sessionStorage.setItem('email',user.email);
+    sessionStorage.setItem('firstName',user.firstName);
+    sessionStorage.setItem('homeAddress',user.homeAddress);
+    sessionStorage.setItem('lastName',user.lastName);
+    sessionStorage.setItem('mobileNumber',user.mobileNumber);
+    sessionStorage.setItem('officeAddress',user.officeAddress);
+    sessionStorage.setItem('password',user.password);
+    sessionStorage.setItem('role',user.role);
+    sessionStorage.setItem('vehicle',user.vehicle);
   }
 
 }

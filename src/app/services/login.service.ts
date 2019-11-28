@@ -12,4 +12,8 @@ export class LoginService {
   userDetails(user): Observable<any>{
     return this.httpClient.post<any>('http://localhost:8080/login/user', user, { observe : 'response' });
   }
+
+  updateDetails(user): Observable<any>{
+    return this.httpClient.post<any>('http://localhost:8080/login/updateProfile', user, { observe : 'response' });
+  }
 }

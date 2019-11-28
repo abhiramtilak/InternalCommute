@@ -1,3 +1,78 @@
-<p>
-  rider works!
-</p>
+<div class="col-xs-12" style="margin-top: 15px;">
+  <div class="col-xs-10 col-xs-offset-3.5 text-center" ><h3 style="font-family: Segoe UI,Arial,sans-serif;">Rider Form</h3></div>
+  <div class="col-xs-2 "><a href="/profile" class="btn btn-info btn-lg col-md-7">
+    <span class="glyphicon glyphicon-user"></span> Profile 
+  </a>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <form [formGroup]="riderForm" (ngSubmit)="submitRide()" >
+                  <div class="form-group col-xs-12">
+                      <div class = "col-xs-4 text-right">
+                          <label>Vehicle Type</label>
+                      </div>
+                      <div class = "col-xs-8">
+                                  <select class="form-control" formControlName="vehicle">
+                                          <option value="2">2 Wheeler</option>
+                                          <option value="4">4 Wheeler</option>
+                                        </select>
+                          
+                          <div *ngIf="submitted && f.vehicle.errors" class="invalid-feedback">
+                              <div *ngIf="f.vehicle.errors.required">Vehicle Type is required</div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group col-xs-12">
+                      <div class = "col-xs-4 text-right">
+                          <label>Vehicle Number</label>
+                      </div>
+                      <div class = "col-xs-8">
+                          <input type="text" formControlName="vehicleNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.vehicleNumber.errors }" />
+                          <div *ngIf="submitted && f.vehicleNumber.errors" class="invalid-feedback">
+                              <div *ngIf="f.vehicleNumber.errors.required">Please enter vehicle number</div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group col-xs-12">
+                      <div class = "col-xs-4 text-right">
+                          <label>Ride Date</label>
+                      </div>
+                      <div class = "col-xs-8">
+                          <input type="date" (ngModelChange)="onDateChange($event)" formControlName="rideDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.rideDate.errors }" />
+                          <div *ngIf="previousDate"  class="invalid-feedback">Please pick present or future date</div>
+                          <div *ngIf="submitted && f.rideDate.errors" class="invalid-feedback">
+                              <div *ngIf="f.rideDate.errors.required">Please pick ride time</div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group col-xs-12">
+                      <div class = "col-xs-4 text-right">
+                          <label>Ride Time</label>
+                      </div>
+                      <div class = "col-xs-8">
+                          <input type="time" (ngModelChange)="onTimeChange($event)" formControlName="rideTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.rideTime.errors }" />
+                          <div *ngIf="previousTime"  class="invalid-feedback">Please pick future time</div>
+                          <div *ngIf="before10Min"  class="invalid-feedback">Please pick time after 10 Min.</div>
+                          <div *ngIf="submitted && f.rideTime.errors" class="invalid-feedback">
+                              <div *ngIf="f.rideTime.errors.required">Please pick ride date</div>
+                          </div>
+                      </div>
+                  </div>
+
+          <div class="form-group col-xs-12">
+            <div class="col-xs-6"></div>
+              <div class="col-xs-2"><button class="btn btn-primary">Post Ride</button></div>
+              <div class="col-xs-4"></div>
+          </div>
+              </form>
+</div>
+</div>
+</div>
+</div>

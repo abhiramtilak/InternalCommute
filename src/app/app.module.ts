@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RiderComponent } from './rider/rider.component';
+import { RideTakerComponent } from './ride-taker/ride-taker.component';
+import { AdminComponent } from './admin/admin.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { RiderComponent } from './rider/rider.component';
     HomePageComponent,
     LoginComponent,
     RegisterComponent,
-    RiderComponent
+    RiderComponent,
+    RideTakerComponent,
+    AdminComponent,
+    UserprofileComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +34,10 @@ import { RiderComponent } from './rider/rider.component';
       {path: '', component: HomePageComponent},
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      {path: 'rider', component: RiderComponent}
+      {path: 'rider', component: RiderComponent},
+      {path: 'ridertaker', component: RideTakerComponent},
+      {path: 'admin', component: AdminComponent},
+      {path: 'profile', component: UserprofileComponent}
     ])
   ],
   providers: [],

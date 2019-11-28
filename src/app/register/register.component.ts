@@ -16,17 +16,19 @@ export class RegisterComponent implements OnInit {
   errorMessageStatus: Boolean;
   successMessageStatus: Boolean;
   successMessage: String;
+  riderValues: Boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private registerService: RegisterService
   ) { 
+      this.riderValues = false;
       this.registrationForm = this.formBuilder.group({
       firstName: ['abhiram', Validators.required],
       lastName: ['tilak', Validators.required],
       email: ['test@test.com', [Validators.required,Validators.email]],
       mobileNumber: ['8106632929', [Validators.required]],
-      role: ['Rider'],
+      role: ['RideTaker'],
       officeAddress: ['office address', Validators.required],
       homeAddress: ['home address', Validators.required],
       password: ['123456', [Validators.required,Validators.minLength(6)]],
@@ -58,4 +60,11 @@ export class RegisterComponent implements OnInit {
         console.log(err);
     });
   }
+  onChange(newValue) {
+    if( newValue === 'Rider' ){
+      this.riderValues = true;
+    }else{
+      this.riderValues = false;
+    }
+}
 }

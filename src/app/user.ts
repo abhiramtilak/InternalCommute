@@ -1,4 +1,5 @@
 export class User {
+    userId: BigInteger;
     firstName: String;
     lastName: String;
     email: String;
@@ -10,4 +11,5 @@ export class User {
     confirmPassword: String;
     vehicle: String;
     availableSeats: String;
+
 }

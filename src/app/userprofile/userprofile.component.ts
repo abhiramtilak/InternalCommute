@@ -12,11 +12,17 @@ export class UserprofileComponent implements OnInit {
   submitted = false;
   riderValues: Boolean;
   backUrl: String;
+  successMessageStatus: Boolean;
+  errorMessageStatus: Boolean;
+  successMessage: String;
+  errorMessage: String;
+
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
   ) {
-    debugger
+      this.successMessageStatus = false;
+      this.errorMessageStatus = false;
       if( sessionStorage.getItem('role') === 'Rider' ){
         this.backUrl = '/rider';
       }else if( sessionStorage.getItem('role') === 'RideTaker' ){
@@ -26,6 +32,7 @@ export class UserprofileComponent implements OnInit {
       }
     this.riderValues = true;
     this.profileForm = this.formBuilder.group({
+      userId: [sessionStorage.getItem('userId')],
       firstName: [sessionStorage.getItem('firstName'), Validators.required],
       lastName: [sessionStorage.getItem('lastName'), Validators.required],
       email: [sessionStorage.getItem('email'), [Validators.required,Validators.email]],
@@ -47,6 +54,13 @@ export class UserprofileComponent implements OnInit {
     if (this.profileForm.invalid) {
       return;
   }
+  this.loginService.updateDetails(this.profileForm.value).subscribe((res) => {
+    this.successMessageStatus = true;
+    this.successMessage = 'Profile updated successfully.'
+  }, err => {
+    this.errorMessageStatus = true;
+    this.errorMessage = 'Some thing went wrong. Please try again later.'
+  });
 }
 onChange(newValue) {
   if( newValue === 'Rider' ){
@@ -54,13 +68,6 @@ onChange(newValue) {
   }else{
     this.riderValues = false;
   }
-
-  this.loginService.updateDetails(this.profileForm.value).subscribe((res) => {
-    alert('update success');
-  }, err => {
-      alert('update failed');
-  });
-
 }
   ngOnInit() {
   }

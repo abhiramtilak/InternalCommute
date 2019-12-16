@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) { 
     this.loginForm = this.formBuilder.group({
-      email: ['abhiram.veerapaneni@gmail.com', [Validators.required,Validators.email]],
+      email: ['tesasdasdt@test.com', [Validators.required,Validators.email]],
       password: ['123456', [Validators.required,Validators.minLength(6)]],
     });
   }
@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
   });
   }
   preparesessionObject(user){
+    sessionStorage.setItem('userId', user.userId);
     sessionStorage.setItem('availableseats',user.availableSeats);
     sessionStorage.setItem('email',user.email);
     sessionStorage.setItem('firstName',user.firstName);

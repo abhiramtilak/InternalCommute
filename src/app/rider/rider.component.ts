@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { timingSafeEqual } from 'crypto';
+import { RiderService } from '../services/rider.service';
 
 @Component({
   selector: 'app-rider',
@@ -14,13 +14,16 @@ export class RiderComponent implements OnInit {
   previousTime: Boolean;
   before10Min: Boolean;
   constructor( 
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private riderService: RiderService
     ) { 
       this.previousDate = false;
       this.previousTime = false;
       this.before10Min = false;
       this.riderForm = this.formBuilder.group({
+        userId: [sessionStorage.getItem('userId')],
         vehicle: [sessionStorage.getItem('vehicle'), Validators.required],
+        availableSeats: [sessionStorage.getItem('availableseats'), Validators.required],
         vehicleNumber: ['TS00GR0000', Validators.required],
         rideDate: [this.currentDate(), Validators.required],
         rideTime: [this.currentTime(), Validators.required],
@@ -39,7 +42,11 @@ export class RiderComponent implements OnInit {
     if (this.riderForm.invalid) {
       return;
   }
-  alert('form submitted successfully');
+  this.riderService.postRide(this.riderForm.value).subscribe((res) => {
+    alert('update success');
+  }, err => {
+      alert('update failed');
+  });
 }
 onDateChange(date){
   if( this.riderForm.value.rideDate < this.currentDate() ){

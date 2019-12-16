@@ -1,7 +1,16 @@
 <div class="col-xs-12" style="margin-top: 15px;">
-    <div class="col-xs-10 col-xs-offset-3.5 text-center" ><h3 style="font-family: Segoe UI,Arial,sans-serif;">Ride taker Form</h3></div>
-    <div class="col-xs-2 "><a href="/profile" class="btn btn-info btn-lg col-md-7">
-      <span class="glyphicon glyphicon-user"></span> Profile 
-    </a>
-    </div>
-  </div>
+  <div class="col-xs-10 col-xs-offset-3.5 text-center" ><h3 style="font-family: Segoe UI,Arial,sans-serif;">Rider taker Form</h3></div>
+  <!-- <div class="col-xs-2 " ><a href="/profile" class="btn btn-info btn-lg col-md-7" style="background-color: #337ab7;">
+    <span class="glyphicon glyphicon-user" ></span> Profile 
+  </a>
+  </div> -->
+  <div class="dropdown col-xs-2">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="/profile">Profile Update</a></li>
+          <li><a href="/passwordChange">Password Update</a></li>
+          <li><a href="/signOut">Sign Out</a></li>
+        </ul>
+      </div>
+</div>

@@ -13,6 +13,8 @@ import { RiderComponent } from './rider/rider.component';
 import { RideTakerComponent } from './ride-taker/ride-taker.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
+import { SignOutComponent } from './sign-out/sign-out.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
     RiderComponent,
     RideTakerComponent,
     AdminComponent,
-    UserprofileComponent
+    UserprofileComponent,
+    PasswordChangeComponent,
+    SignOutComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,9 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
       {path: 'rider', component: RiderComponent},
       {path: 'ridertaker', component: RideTakerComponent},
       {path: 'admin', component: AdminComponent},
-      {path: 'profile', component: UserprofileComponent}
+      {path: 'profile', component: UserprofileComponent},
+      {path: 'passwordChange', component: PasswordChangeComponent},
+      {path: 'signOut', component: SignOutComponent}
     ])
   ],
   providers: [],

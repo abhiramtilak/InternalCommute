@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class HomePageComponent implements OnInit {
 
   riders = ['Rider','Ride Taker'];
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit() {
   }

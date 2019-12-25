@@ -13,6 +13,12 @@ export class RiderComponent implements OnInit {
   previousDate: Boolean;
   previousTime: Boolean;
   before10Min: Boolean;
+  successMessageStatus = false;
+  errorMessageStatus = false;
+  message : String;
+  toAddress : String;
+  fromAddress: String;
+
   constructor( 
     private formBuilder: FormBuilder,
     private riderService: RiderService
@@ -25,6 +31,8 @@ export class RiderComponent implements OnInit {
         vehicle: [sessionStorage.getItem('vehicle'), Validators.required],
         availableSeats: [sessionStorage.getItem('availableseats'), Validators.required],
         vehicleNumber: ['TS00GR0000', Validators.required],
+        fromAddress: [sessionStorage.getItem('officeAddress'), Validators.required],
+        toAddress: [sessionStorage.getItem('homeAddress'), Validators.required],
         rideDate: [this.currentDate(), Validators.required],
         rideTime: [this.currentTime(), Validators.required],
       });
@@ -43,9 +51,13 @@ export class RiderComponent implements OnInit {
       return;
   }
   this.riderService.postRide(this.riderForm.value).subscribe((res) => {
-    alert('update success');
+        this.errorMessageStatus = false;
+        this.successMessageStatus = true;
+        this.message = 'ride posted successfully!!';
   }, err => {
-      alert('update failed');
+        this.errorMessageStatus = true;
+        this.successMessageStatus = false;
+        this.message = 'Some thing went wrong. Please try again!!';
   });
 }
 onDateChange(date){
@@ -81,6 +93,19 @@ currentDate() {
 currentTime(){
   const currentDate = new Date();
   return currentDate.getHours()+':'+ ((currentDate.getMinutes().toString().length == 1 ) ? '0'+currentDate.getMinutes().toString() : currentDate.getMinutes().toString()) ;
+}
+onSwapAddress(){
+  if( this.riderForm.value.fromAddress === null || this.riderForm.value.fromAddress === '' || this.riderForm.value.toAddress === null || this.riderForm.value.toAddress === '' ){
+    this.submitted = true;
+    if (this.riderForm.invalid) {
+      return;
+    }
+  }else{
+    this.toAddress = this.riderForm.value.toAddress;
+    this.fromAddress = this.riderForm.value.fromAddress;
+    this.riderForm.controls['fromAddress'].setValue(this.toAddress);
+    this.riderForm.controls['toAddress'].setValue(this.fromAddress);
+  }
 }
 
 }

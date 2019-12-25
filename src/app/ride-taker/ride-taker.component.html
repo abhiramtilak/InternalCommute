@@ -1,5 +1,5 @@
 <div class="col-xs-12" style="margin-top: 15px;">
-  <div class="col-xs-10 col-xs-offset-3.5 text-center" ><h3 style="font-family: Segoe UI,Arial,sans-serif;">Rider taker Form</h3></div>
+  <div class="col-xs-10 col-xs-offset-3.5 text-center" ><h3 style="font-family: Segoe UI,Arial,sans-serif;">Available Rides</h3></div>
   <!-- <div class="col-xs-2 " ><a href="/profile" class="btn btn-info btn-lg col-md-7" style="background-color: #337ab7;">
     <span class="glyphicon glyphicon-user" ></span> Profile 
   </a>
@@ -13,4 +13,38 @@
           <li><a href="/signOut">Sign Out</a></li>
         </ul>
       </div>
+</div>
+<div class="col-xs-12" style="margin-top: 3%;">
+  <div class="col-xs-1"></div>
+    <div class="col-xs-10">
+      <table class="table">
+          <thead class="thead-dark">
+              <tr scope="col">
+                  <th scope="col">#</th>
+                  <th scope="col">Rider Name</th>
+                  <th scope="col">Rider Mobile Number</th>
+                  <th scope="col">Vehicle Type</th>
+                  <th scope="col">Available Seats</th>
+                  <th scope="col">Vehicle Number</th>
+                  <th scope="col">Ride Date and Time</th> 
+                  <th scope="col">From Address</th> 
+                  <th scope="col">To Address</th> 
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rideData of allRides">
+              <th >{{rideData.rowId}}</th>
+              <td>{{rideData.riderName}}</td>
+              <td>{{rideData.riderMobileNumber}}</td>
+              <td>{{rideData.vehicle}} Wheeler</td>
+              <td>{{rideData.availableSeats}}</td>
+              <td>{{rideData.vehicleNumber}}</td>
+              <td>{{rideData.rideDateTime | date:'medium'}}</td>
+              <td>{{rideData.fromAddress}}</td>
+              <td>{{rideData.toAddress}}</td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  <div class="col-xs-1"></div>
 </div>

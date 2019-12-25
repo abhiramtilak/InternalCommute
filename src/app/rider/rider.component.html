@@ -67,6 +67,35 @@
                   </div>
 
                   <div class="form-group col-xs-12">
+                        <div class = "col-xs-4 text-right">
+                            <label>From Address</label>
+                        </div>
+                        <div class = "col-xs-8">
+                            <input type="text" formControlName="fromAddress" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fromAddress.errors }" id="fromAddress"/>
+                            <div *ngIf="submitted && f.fromAddress.errors" class="invalid-feedback">
+                                <div *ngIf="f.fromAddress.errors.required">Please enter from address</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="col-xs-11"></div>
+                                <div class="col-xs-1">
+                                   <a (click)="onSwapAddress()"> <i class="glyphicon glyphicon-sort" ></i></a>
+                                </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                            <div class = "col-xs-4 text-right">
+                                <label>To Address</label>
+                            </div>
+                            <div class = "col-xs-8">
+                                <input type="text" formControlName="toAddress" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.toAddress.errors }" />
+                                <div *ngIf="submitted && f.toAddress.errors" class="invalid-feedback">
+                                    <div *ngIf="f.toAddress.errors.required">Please enter to address</div>
+                                </div>
+                            </div>
+                        </div>
+
+                  <div class="form-group col-xs-12">
                       <div class = "col-xs-4 text-right">
                           <label>Ride Date</label>
                       </div>
@@ -92,12 +121,24 @@
                           </div>
                       </div>
                   </div>
-
-          <div class="form-group col-xs-12">
-            <div class="col-xs-6"></div>
-              <div class="col-xs-2"><button class="btn btn-primary">Post Ride</button></div>
-              <div class="col-xs-4"></div>
-          </div>
+                  <div class="col-xs-12">
+                    <div class="col-xs-3"></div>
+                    <div class="alert alert-success form-group col-xs-7" *ngIf="successMessageStatus">
+                    <strong>Success!!</strong> {{message}}</div>
+                    <div class="col-xs-2"></div>
+                </div>
+            
+                <div class="col-xs-12">
+                    <div class="col-xs-3"></div>
+                    <div class="alert alert-danger form-group col-xs-7" *ngIf="errorMessageStatus">
+                    <strong>Error!!</strong> {{message}}</div>
+                    <div class="col-xs-2"></div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="col-xs-6"></div>
+                    <div class="col-xs-2"><button class="btn btn-primary">Post Ride</button></div>
+                    <div class="col-xs-4"></div>
+                </div>
               </form>
 </div>
 </div>

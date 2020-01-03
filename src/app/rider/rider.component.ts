@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RiderService } from '../services/rider.service';
+import { RideRequestsComponent } from '../ride-requests/ride-requests.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-rider',
@@ -21,11 +23,23 @@ export class RiderComponent implements OnInit {
 
   constructor( 
     private formBuilder: FormBuilder,
-    private riderService: RiderService
-    ) { 
+    private riderService: RiderService,
+    public dialog: MatDialog
+    ) {
+
       this.previousDate = false;
       this.previousTime = false;
       this.before10Min = false;
+
+      const dialogRef = this.dialog.open(RideRequestsComponent, {
+        width: '85%',
+        data: {}
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+
       this.riderForm = this.formBuilder.group({
         userId: [sessionStorage.getItem('userId')],
         vehicle: [sessionStorage.getItem('vehicle'), Validators.required],

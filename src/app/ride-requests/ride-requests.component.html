@@ -1,0 +1,46 @@
+<div class="col-sm-12">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <h4 mat-dialog-title>Active Ride Requests </h4>
+  </div>
+  <div class="col-sm-2"></div>
+  <div class="col-sm-2">
+    <button mat-stroked-button (click)="closeRequests()" >Close</button>
+  </div>
+</div>
+<div mat-dialog-content>
+    <div  style="margin-top: 3%;">
+        <div class="container-fluid">
+          <table class="table">
+              <thead class="thead-dark">
+                  <tr scope="col">
+                      <th scope="col">#</th>
+                      <th scope="col" style="display: none;">Request Id</th>
+                      <th scope="col">Ride Taker Name</th>
+                      <th scope="col">Mobile Number</th>
+                      <th scope="col">Ride Date</th>
+                      <th scope="col">From Address</th>
+                      <th scope="col">To Address</th>
+                      <th scope="col">Accept/Decline</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rideData of rideRequests">
+                  <td >{{rideData.rowId}}</td>
+                  <td style="display: none;">{{rideData.requestId}}</td>
+                  <td>{{rideData.firstName}} {{rideData.lastName}}</td>
+                  <td>{{rideData.mobileNumber}}</td>
+                  <td>{{rideData.rideDate | date:'medium'}}</td>
+                  <td>{{rideData.fromAddress}}</td>
+                  <td>{{rideData.toAddress}}</td>
+                  <td>
+                    <button (click)="acceptRequest(rideData)" class="btn btn-success  ">Accept</button> &nbsp;&nbsp;
+                    <button (click)="declineRequest(rideData)" class="btn btn-danger">Decline</button>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+    </div>
+  
+</div>

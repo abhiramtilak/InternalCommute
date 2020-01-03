@@ -15,6 +15,10 @@ import { AdminComponent } from './admin/admin.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { SignOutComponent } from './sign-out/sign-out.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RideRequestsComponent } from './ride-requests/ride-requests.component';
+import { DemoMaterialModule } from './material-module';
+import { MyRidesComponent } from './my-rides/my-rides.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +31,13 @@ import { SignOutComponent } from './sign-out/sign-out.component';
     AdminComponent,
     UserprofileComponent,
     PasswordChangeComponent,
-    SignOutComponent
+    SignOutComponent,
+    RideRequestsComponent,
+    MyRidesComponent,
   ],
   imports: [
     BrowserModule,
+    DemoMaterialModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -43,8 +50,13 @@ import { SignOutComponent } from './sign-out/sign-out.component';
       {path: 'admin', component: AdminComponent},
       {path: 'profile', component: UserprofileComponent},
       {path: 'passwordChange', component: PasswordChangeComponent},
-      {path: 'signOut', component: SignOutComponent}
-    ])
+      {path: 'signOut', component: SignOutComponent},
+      {path: 'myRides', component: MyRidesComponent}
+    ]),
+    BrowserAnimationsModule
+  ],
+  entryComponents: [
+    RideRequestsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

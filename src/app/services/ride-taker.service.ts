@@ -13,4 +13,8 @@ export class RideTakerService {
     return this.httpClient.get<any>('http://localhost:8080/rides/getRides', { observe : 'response' });
   }
 
+  sendRideRequest(rideRequest): Observable<any>{
+    return this.httpClient.post<any>('http://localhost:8080/rides/requestRide', rideRequest, { observe : 'response' });
+  }
+
 }

@@ -55,8 +55,13 @@ export class UserprofileComponent implements OnInit {
       return;
   }
   this.loginService.updateDetails(this.profileForm.value).subscribe((res) => {
-    this.successMessageStatus = true;
-    this.successMessage = 'Profile updated successfully.'
+    if( res.body.responseCode === "OK" ){
+      this.successMessageStatus = true;
+      this.successMessage = 'Profile updated successfully. New details will be updated in next login!!'
+    }else{
+      this.errorMessageStatus = true;
+      this.errorMessage = 'Some thing went wrong. Please try again later.'
+    }
   }, err => {
     this.errorMessageStatus = true;
     this.errorMessage = 'Some thing went wrong. Please try again later.'

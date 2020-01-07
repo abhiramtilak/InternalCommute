@@ -10,6 +10,7 @@ import { RiderService } from '../services/rider.service';
 export class RideRequestsComponent implements OnInit {
 
   rideRequests: any;
+  dataAvailable = true;
 
   constructor(  public dialogRef: MatDialogRef<RideRequestsComponent>,
                 private riderService: RiderService
@@ -17,13 +18,14 @@ export class RideRequestsComponent implements OnInit {
 
     this.riderService.getRideRequests(sessionStorage.getItem('userId')).subscribe((res) => {
       if( res.body.length > 0 ){
+        this.dataAvailable = false;
         for( let i=1; i<=res.body.length; i++ ){
           res.body[i-1].rideDate = new Date(res.body[i-1].rideDate); 
           res.body[i-1].rowId = i;
         }
         this.rideRequests = res.body;
       }else{
-        alert('No active ride requests are available!!');
+        //alert('No active ride requests are available!!');
       }
     }, err => {
       alert('Some thing went wrong. Please try again later!!')          
@@ -36,6 +38,26 @@ export class RideRequestsComponent implements OnInit {
 
   closeRequests(): void {
     this.dialogRef.close();
+  }
+
+  acceptRequest(rideDetails){
+    this.riderService.acceptRideRequest(rideDetails.requestId).subscribe((res) => {
+      alert('Ride Request Accepted Successfully. You will recieve Ride taker details through email.');
+      window.location.reload();
+      
+    }, err => {
+      alert('Some thing went wrong. Please try again later!!')          
+    });
+  }
+
+  declineRequest(rideDetails){
+    this.riderService.rejectRideRequest(rideDetails.requestId).subscribe((res) => {
+      alert('Ride Request Declined.');
+      window.location.reload();
+      
+    }, err => {
+      alert('Some thing went wrong. Please try again later!!')          
+    });
   }
 
 }

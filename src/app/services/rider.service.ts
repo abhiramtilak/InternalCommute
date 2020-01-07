@@ -25,4 +25,12 @@ export class RiderService {
     return this.httpClient.delete<any>('http://localhost:8080/rides/cancelRide?rideId='+rideId, { observe : 'response' });
   }
 
+  acceptRideRequest(requestId): Observable<any>{
+    return this.httpClient.get<any>('http://localhost:8080/rides/acceptRequest?requestId='+requestId, { observe : 'response' });
+  }
+
+  rejectRideRequest(requestId): Observable<any>{
+    return this.httpClient.get<any>('http://localhost:8080/rides/rejectRequest?requestId='+requestId, { observe : 'response' });
+  }
+
 }

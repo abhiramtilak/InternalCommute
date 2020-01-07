@@ -11,6 +11,9 @@
         </ul>
       </div>
 </div>
+
+<div *ngIf="!dataAvailable; else showData" mat-dialog-content style="margin-left: 35%;padding-top: 100px;"><h3><b>No Active Rides Available.</b></h3></div>
+  <ng-template #showData>
 <div  style="margin-top: 3%;">
     <div class="container-fluid">
       <table class="table">
@@ -45,9 +48,10 @@
               <td>{{rideData.rideDateTime | date:'medium'}}</td>
               <td>{{rideData.fromAddress}}</td>
               <td>{{rideData.toAddress}}</td>
-              <td><button (click)="sendRideRequest(rideData)">Request</button></td>
+              <td><button (click)="sendRideRequest(rideData)" class="btn btn-success">Request</button></td>
             </tr>
           </tbody>
       </table>
     </div>
 </div>
+</ng-template>

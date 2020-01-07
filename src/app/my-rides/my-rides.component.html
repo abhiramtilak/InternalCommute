@@ -4,14 +4,15 @@
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile
           <span class="caret"></span></button>
           <ul class="dropdown-menu">
-            <li><a href="/myRides">My Rides</a></li>
+            <li><a href="/rider">Home</a></li>
             <li><a href="/profile">Profile Update</a></li>
             <li><a href="/passwordChange">Password Update</a></li>
             <li><a href="/signOut">Sign Out</a></li>
           </ul>
         </div>
   </div>
-
+  <div *ngIf="dataAvailable; else showData" mat-dialog-content style="margin-left: 35%;padding-top: 100px;"><h3><b>No Active Rides Available.</b></h3></div>
+  <ng-template #showData>
 <div  style="margin-top: 3%;">
     <div class="container-fluid">
       <table class="table">
@@ -36,9 +37,10 @@
               <td>{{rideData.rideDate | date:'medium'}}</td>
               <td>{{rideData.fromAddress}}</td>
               <td>{{rideData.toAddress}}</td>
-              <td><button (click)="cancelRide(rideData)" class="btn btn-danger">Delete</button></td>
+              <td><button (click)="cancelRide(rideData)" class="btn btn-danger">Cancel</button></td>
             </tr>
           </tbody>
       </table>
     </div>
 </div>
+</ng-template>

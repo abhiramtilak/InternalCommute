@@ -8,6 +8,8 @@
     <button mat-stroked-button (click)="closeRequests()" >Close</button>
   </div>
 </div>
+<div *ngIf="dataAvailable; else showData" mat-dialog-content style="margin-left: 35%;">No Active Ride Requests Available.</div>
+<ng-template #showData>
 <div mat-dialog-content>
     <div  style="margin-top: 3%;">
         <div class="container-fluid">
@@ -34,7 +36,7 @@
                   <td>{{rideData.fromAddress}}</td>
                   <td>{{rideData.toAddress}}</td>
                   <td>
-                    <button (click)="acceptRequest(rideData)" class="btn btn-success  ">Accept</button> &nbsp;&nbsp;
+                    <button (click)="acceptRequest(rideData)" class="btn btn-success ">Accept</button> &nbsp;&nbsp;
                     <button (click)="declineRequest(rideData)" class="btn btn-danger">Decline</button>
                   </td>
                 </tr>
@@ -44,3 +46,4 @@
     </div>
   
 </div>
+</ng-template>

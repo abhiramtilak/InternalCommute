@@ -9,19 +9,21 @@ import { RiderService } from '../services/rider.service';
 export class MyRidesComponent implements OnInit {
 
   allRides: any;
+  dataAvailable = true;
 
   constructor(private riderService: RiderService) {
 
     this.riderService.myRides(sessionStorage.getItem('userId')).subscribe((res) => {
       
       if( res.body.length > 0 ){
+        this.dataAvailable = false;
         for( let i=1; i<=res.body.length; i++ ){
           res.body[i-1].rideDate = new Date(res.body[i-1].rideDate); 
           res.body[i-1].rowId = i;
         }
         this.allRides = res.body;
       }else{
-        alert('No Active rides Available!!');
+        
       }
 
     }, err => {

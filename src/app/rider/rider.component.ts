@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RiderService } from '../services/rider.service';
 import { RideRequestsComponent } from '../ride-requests/ride-requests.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rider',
@@ -24,8 +25,19 @@ export class RiderComponent implements OnInit {
   constructor( 
     private formBuilder: FormBuilder,
     private riderService: RiderService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
     ) {
+
+      if( sessionStorage.getItem('role') != null ){
+        if( sessionStorage.getItem('role') === 'Rider' ){
+          this.router.navigate(['/rider']);
+        }else if(sessionStorage.getItem('role') === 'RideTaker' ){
+          this.router.navigate(['/ridertaker']);
+        }else if( sessionStorage.getItem('role') === 'admin' ){
+          this.router.navigate(['/admin']);
+        }      
+      }
 
       this.previousDate = false;
       this.previousTime = false;

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { User } from '../user';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,18 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router
-  ) { 
+  ) {
+
+    if( sessionStorage.getItem('role') != null ){
+      if( sessionStorage.getItem('role') === 'Rider' ){
+        this.router.navigate(['/rider']);
+      }else if(sessionStorage.getItem('role') === 'RideTaker' ){
+        this.router.navigate(['/ridertaker']);
+      }else if( sessionStorage.getItem('role') === 'admin' ){
+        this.router.navigate(['/admin']);
+      }      
+    }
+
     this.loginForm = this.formBuilder.group({
       email: ['abhiram.veerapaneni@gmail.com', [Validators.required,Validators.email]],
       password: ['123456', [Validators.required,Validators.minLength(6)]],

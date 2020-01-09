@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../_helpers/must-match.validator';
 import { RegisterService } from '../services/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,8 +21,20 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private router: Router
   ) { 
+
+    if( sessionStorage.getItem('role') != null ){
+      if( sessionStorage.getItem('role') === 'Rider' ){
+        this.router.navigate(['/rider']);
+      }else if(sessionStorage.getItem('role') === 'RideTaker' ){
+        this.router.navigate(['/ridertaker']);
+      }else if( sessionStorage.getItem('role') === 'admin' ){
+        this.router.navigate(['/admin']);
+      }      
+    }
+
       this.riderValues = false;
       this.registrationForm = this.formBuilder.group({
       firstName: ['abhiram', Validators.required],

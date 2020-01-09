@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MustMatch } from '../_helpers/must-match.validator';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PasswordUpdateService } from '../services/password-update.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-password-change',
@@ -17,7 +18,8 @@ export class PasswordChangeComponent implements OnInit {
   backUrl: String;
 
   constructor(private formBuilder: FormBuilder,
-              private passwordUpdateService: PasswordUpdateService
+              private passwordUpdateService: PasswordUpdateService,
+              private router: Router
       ) { 
         if( sessionStorage.getItem('role') === 'Rider' ){
           this.backUrl = '/rider';
@@ -26,6 +28,17 @@ export class PasswordChangeComponent implements OnInit {
         }else if( sessionStorage.getItem('role') === 'admin' ){
           this.backUrl = '/admin';
         }
+
+        if( sessionStorage.getItem('role') != null ){
+          if( sessionStorage.getItem('role') === 'Rider' ){
+            this.router.navigate(['/rider']);
+          }else if(sessionStorage.getItem('role') === 'RideTaker' ){
+            this.router.navigate(['/ridertaker']);
+          }else if( sessionStorage.getItem('role') === 'admin' ){
+            this.router.navigate(['/admin']);
+          }      
+        }
+
     this.passwordUpdateFrom = this.formBuilder.group({
       oldPassword: ['', [Validators.required,Validators.minLength(6)]],
       newPassword: ['', [Validators.required,Validators.minLength(6)]],

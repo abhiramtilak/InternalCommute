@@ -1,7 +1,7 @@
 import { Component, OnInit, ɵɵresolveBody } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RideTakerService } from '../services/ride-taker.service';
-import { Rides } from '../rides';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ride-taker',
@@ -12,7 +12,18 @@ export class RideTakerComponent implements OnInit {
   allRides;
   dataAvailable = false;
   constructor(private formBuilder: FormBuilder,
-    private rideTakerService: RideTakerService) { 
+    private rideTakerService: RideTakerService,
+    private router: Router) { 
+
+      if( sessionStorage.getItem('role') != null ){
+        if( sessionStorage.getItem('role') === 'Rider' ){
+          this.router.navigate(['/rider']);
+        }else if(sessionStorage.getItem('role') === 'RideTaker' ){
+          this.router.navigate(['/ridertaker']);
+        }else if( sessionStorage.getItem('role') === 'admin' ){
+          this.router.navigate(['/admin']);
+        }      
+      }
 
       this.rideTakerService.getAvailableRides().subscribe((res) => {
         if( res.body.length > 0 ){

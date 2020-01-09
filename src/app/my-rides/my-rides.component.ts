@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RiderService } from '../services/rider.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-rides',
@@ -11,7 +12,18 @@ export class MyRidesComponent implements OnInit {
   allRides: any;
   dataAvailable = true;
 
-  constructor(private riderService: RiderService) {
+  constructor(private riderService: RiderService,
+    private router: Router) {
+
+    if( sessionStorage.getItem('role') != null ){
+      if( sessionStorage.getItem('role') === 'Rider' ){
+        this.router.navigate(['/rider']);
+      }else if(sessionStorage.getItem('role') === 'RideTaker' ){
+        this.router.navigate(['/ridertaker']);
+      }else if( sessionStorage.getItem('role') === 'admin' ){
+        this.router.navigate(['/admin']);
+      }      
+    }
 
     this.riderService.myRides(sessionStorage.getItem('userId')).subscribe((res) => {
       

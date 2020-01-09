@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { RiderService } from '../services/rider.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ride-requests',
@@ -13,8 +14,19 @@ export class RideRequestsComponent implements OnInit {
   dataAvailable = true;
 
   constructor(  public dialogRef: MatDialogRef<RideRequestsComponent>,
-                private riderService: RiderService
+                private riderService: RiderService,
+                private router: Router
     ) { 
+
+      if( sessionStorage.getItem('role') != null ){
+        if( sessionStorage.getItem('role') === 'Rider' ){
+          this.router.navigate(['/rider']);
+        }else if(sessionStorage.getItem('role') === 'RideTaker' ){
+          this.router.navigate(['/ridertaker']);
+        }else if( sessionStorage.getItem('role') === 'admin' ){
+          this.router.navigate(['/admin']);
+        }      
+      }
 
     this.riderService.getRideRequests(sessionStorage.getItem('userId')).subscribe((res) => {
       if( res.body.length > 0 ){
